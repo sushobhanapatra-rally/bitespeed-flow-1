@@ -8,7 +8,7 @@ import NodePanel from './panel/NodePanel';
 import ControlPanel from './panel/ControlPanel';
 import './Flow.css';
 
-let id = 5;
+let id = 1;
 const getId = () => `${id++}`;
 
 function Flow() {
@@ -22,6 +22,8 @@ function Flow() {
     const { nodes, edges, onNodesChange, onEdgesChange, onConnect } = useStore();
 
     const addNode = useStore((s) => s.addNode);
+    const onEdgesDelete = useStore((s) => s.onEdgesDelete);
+
 
     const onDragOver = useCallback((event) => {
         event.preventDefault();
@@ -48,22 +50,26 @@ function Flow() {
                 id: getId(),
                 type,
                 position,
-                data: { label: `${type} node` },
+                data: { label: `${type} node`, isSourceOccupied: false },
             };
             console.log(newNode);
             addNode(newNode);
         },
         [reactFlowInstance]
     );
-    
+
     const onNodeClick = useCallback((event, node) => {
         console.log(node.id);
         setIsNodesPanel([false, node]);
-        
+
     }, []);
-    
+
     const onPaneClick = useCallback((event) => {
         setIsNodesPanel([true, null]);
+    }, []);
+
+    const onEdgesDeleteEvent = useCallback((event) => {
+        onEdgesDelete(event.map((event) => event.source));
     }, []);
 
     return (
@@ -76,6 +82,7 @@ function Flow() {
                         edges={edges}
                         onNodesChange={onNodesChange}
                         onEdgesChange={onEdgesChange}
+                        onEdgesDelete={onEdgesDeleteEvent}
                         onNodeClick={onNodeClick}
                         onConnect={onConnect}
                         onInit={setReactFlowInstance}
@@ -87,7 +94,7 @@ function Flow() {
                         <Controls />
                     </ReactFlow>
                 </div>
-                { isNodesPanel[0] ? <NodePanel /> : <ControlPanel nodeId={isNodesPanel[1]?.id} message={isNodesPanel[1]?.message}/>}
+                {isNodesPanel[0] ? <NodePanel /> : <ControlPanel nodeId={isNodesPanel[1]?.id} message={isNodesPanel[1]?.message} />}
             </ReactFlowProvider>
         </div>
     );

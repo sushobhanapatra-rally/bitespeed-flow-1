@@ -31,9 +31,27 @@ const useStore = create((set, get) => ({
       edges: applyEdgeChanges(changes, get().edges),
     });
   },
+  onEdgesDelete: (nodes) => {
+    set({
+      nodes: get().nodes.map((node) => {
+        if (nodes.includes(node.id)) {
+          // it's important to create a new object here, to inform React Flow about the changes
+          node.data = { ...node.data, isSourceOccupied: false };
+        }
+        return node;
+      }),
+    });
+  },
   onConnect: (connection) => {
     set({
       edges: addEdge(connection, get().edges),
+      nodes: get().nodes.map((node) => {
+        if (node.id === connection.source) {
+          // it's important to create a new object here, to inform React Flow about the changes
+          node.data = { ...node.data, isSourceOccupied: true };
+        }
+        return node;
+      }),
     });
   },
   addNode: (new_node) => {

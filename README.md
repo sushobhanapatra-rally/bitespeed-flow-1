@@ -1,6 +1,6 @@
-# Create React App
+# BiteSpeed Frontend Task: Chatbot flow Builder
 
-This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration.
+This directory is a brief example of a [Create React App](https://github.com/facebook/create-react-app) site that can be deployed to Vercel with zero configuration. It is a sample react-flow app with control panels where states are being managed by zustand
 
 ## Deploy Your Own
 

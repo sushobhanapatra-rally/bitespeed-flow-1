@@ -10,7 +10,7 @@ export default () => {
   };
   const nodes = useStore((s) => s.nodes);
   const isValidFlow = () => { const filterNodes = nodes.filter((node) => node.data.isTargetOccupied < 1); return filterNodes.length <= 1;}
-  const onClickSave = (e) => { isValidFlow() ? console.log('valid'): console.log("invalid");}
+  const onClickSave = (e) => { isValidFlow() ? alert('valid'): alert("invalid");}
 
 
   return (

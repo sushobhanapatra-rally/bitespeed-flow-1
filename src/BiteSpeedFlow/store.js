@@ -36,7 +36,7 @@ const useStore = create((set, get) => ({
       nodes: get().nodes.map((node) => {
         if (nodes.includes(node.id)) {
           // it's important to create a new object here, to inform React Flow about the changes
-          node.data = { ...node.data, isSourceOccupied: false };
+          node.data = { ...node.data, isSourceOccupied: false, isTargetOccupied: node.data.isTargetOccupied-1 };
         }
         return node;
       }),
@@ -49,6 +49,10 @@ const useStore = create((set, get) => ({
         if (node.id === connection.source) {
           // it's important to create a new object here, to inform React Flow about the changes
           node.data = { ...node.data, isSourceOccupied: true };
+        }
+        if (node.id === connection.target) {
+          // it's important to create a new object here, to inform React Flow about the changes
+          node.data = { ...node.data, isTargetOccupied: node.data.isTargetOccupied + 1 };
         }
         return node;
       }),

@@ -50,7 +50,7 @@ function Flow() {
                 id: getId(),
                 type,
                 position,
-                data: { label: `${type} node`, isSourceOccupied: false },
+                data: { label: `${type} node`, isSourceOccupied: false, isTargetOccupied: 0 },
             };
             console.log(newNode);
             addNode(newNode);

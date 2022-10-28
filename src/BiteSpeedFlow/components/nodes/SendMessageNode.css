@@ -1,0 +1,25 @@
+.custom-node {
+    width: 150px;
+    min-height: 30px;
+    border-radius: 10px;
+    font-size: 10px;
+    box-shadow: 0px 2px 3px 4px gainsboro;
+  }
+  .custom-node-head {
+    height: 18px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: lightblue;
+  }
+  .custom-node-body {
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  

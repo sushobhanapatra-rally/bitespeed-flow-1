@@ -15,6 +15,9 @@ function Flow() {
     const [isNodesPanel, setIsNodesPanel] = useState([true, null]);
 
     const [reactFlowInstance, setReactFlowInstance] = useState(null);
+    
+    const [validation, setValidation] = useState(null);
+
     const reactFlowWrapper = useRef(null);
 
     const nodeTypes = useMemo(() => ({ [node_types.SEND_MESSAGE]: SendMessageNode }), []);
@@ -72,31 +75,43 @@ function Flow() {
         onEdgesDelete(event.map((event) => event.source));
     }, []);
 
+    const isValidFlow = () => { const filterNodes = nodes.filter((node) => node.data.isTargetOccupied < 1); return filterNodes.length <= 1; }
+    const onClickSave = (e) => { isValidFlow() ? setValidation(true) : setValidation(false); }
+
     return (
-        <div className="dndflow">
-            <ReactFlowProvider>
-                <div className="reactflow-wrapper" ref={reactFlowWrapper}>
-                    <ReactFlow
-                        nodeTypes={nodeTypes}
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onEdgesDelete={onEdgesDeleteEvent}
-                        onNodeClick={onNodeClick}
-                        onConnect={onConnect}
-                        onInit={setReactFlowInstance}
-                        onDrop={onDrop}
-                        onDragOver={onDragOver}
-                        onPaneClick={onPaneClick}
-                        fitView
-                    >
-                        <Controls />
-                    </ReactFlow>
-                </div>
-                {isNodesPanel[0] ? <NodePanel /> : <ControlPanel nodeId={isNodesPanel[1]?.id} message={isNodesPanel[1]?.message} />}
-            </ReactFlowProvider>
-        </div>
+        <>
+            <div className="saveBar">
+                { validation === true && <div className="Successmessage"> Successfully Saved </div> }
+                { validation === false && <div className="Failuremessage"> Cannot save a flow </div> }
+                <button className="save" onClick={onClickSave}>
+                    Save
+                </button>
+            </div>
+            <div className="dndflow">
+                <ReactFlowProvider>
+                    <div className="reactflow-wrapper" ref={reactFlowWrapper}>
+                        <ReactFlow
+                            nodeTypes={nodeTypes}
+                            nodes={nodes}
+                            edges={edges}
+                            onNodesChange={onNodesChange}
+                            onEdgesChange={onEdgesChange}
+                            onEdgesDelete={onEdgesDeleteEvent}
+                            onNodeClick={onNodeClick}
+                            onConnect={onConnect}
+                            onInit={setReactFlowInstance}
+                            onDrop={onDrop}
+                            onDragOver={onDragOver}
+                            onPaneClick={onPaneClick}
+                            fitView
+                        >
+                            <Controls />
+                        </ReactFlow>
+                    </div>
+                    {isNodesPanel[0] ? <NodePanel /> : <ControlPanel nodeId={isNodesPanel[1]?.id} message={isNodesPanel[1]?.message} />}
+                </ReactFlowProvider>
+            </div>
+        </>
     );
 }
 

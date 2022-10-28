@@ -1,6 +1,8 @@
 import React from 'react';
 import { node_types } from '../../constants/node_types';
 import useStore from '../../store';
+import '../Flow.css';
+
 
 export default ({ nodeId, message }) => {
     const setNodeMessage = useStore((s) => s.setNodeMessage);

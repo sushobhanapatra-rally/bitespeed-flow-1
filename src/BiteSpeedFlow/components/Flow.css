@@ -1,5 +1,39 @@
+.saveBar {
+  display: block;
+  text-align: right;
+  background: #fcfcfc;
+
+}
+
+.saveBar .save{
+  border-color: #333381;
+  width: 20%;
+  max-width: 250px;
+  margin-right: 16px;
+
+}
+
+.saveBar .Successmessage{
+  justify-self: center;
+  text-align: center;
+  border-color: #333381;
+  background: #35a335;
+  width: 50%;
+  max-width: 500px;
+  margin-left: 48px;
+}
+
+.saveBar .Failuremessage{
+  justify-self: center;
+  text-align: center;
+  border-color: #333381;
+  background: #b62424;
+  width: 50%;
+  max-width: 500px;
+  margin-left: 48px;
+}
+
 .dndflow {
-    flex-direction: column;
     display: flex;
     flex-grow: 1;
     height: 100%;
@@ -31,7 +65,9 @@
   .dndflow .dndnode.input {
     border-color: #0041d0;
   }
-  
+  .dndflow .dndnode.save {
+    border-color: #0041d0;
+  }
   .dndflow .dndnode.output {
     border-color: #ff0072;
   }
@@ -46,11 +82,10 @@
   }
   
   .updatenode__controls {
-    position: absolute;
     right: 10px;
     top: 10px;
     z-index: 4;
-    font-size: 12px;
+    font-size: 16px;
   }
   
   .updatenode__controls label {
@@ -58,7 +93,7 @@
   }
   
   .updatenode__bglabel {
-    margin-top: 10px;
+    margin-top: 20px;
   }
   
   .updatenode__checkboxwrapper {

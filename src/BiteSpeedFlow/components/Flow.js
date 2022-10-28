@@ -75,7 +75,7 @@ function Flow() {
         onEdgesDelete(event.map((event) => event.source));
     }, []);
 
-    const isValidFlow = () => { const filterNodes = nodes.filter((node) => node.data.isTargetOccupied < 1); return filterNodes.length <= 1; }
+    const isValidFlow = () => { const filterNodes = nodes.filter((node) => node.data.isTargetOccupied < 1); return filterNodes.length == 1; }
     const onClickSave = (e) => { isValidFlow() ? setValidation(true) : setValidation(false); }
 
     return (

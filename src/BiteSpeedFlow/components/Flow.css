@@ -2,7 +2,7 @@
   display: block;
   text-align: right;
   background: #fcfcfc;
-
+  height: 100%;
 }
 
 .saveBar .save{
@@ -10,6 +10,7 @@
   width: 20%;
   max-width: 250px;
   margin-right: 16px;
+  height: 100%;
 
 }
 
@@ -21,6 +22,8 @@
   width: 50%;
   max-width: 500px;
   margin-left: 48px;
+  height: 100%;
+
 }
 
 .saveBar .Failuremessage{
@@ -31,6 +34,8 @@
   width: 50%;
   max-width: 500px;
   margin-left: 48px;
+  height: 100%;
+
 }
 
 .dndflow {
